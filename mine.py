@@ -69,7 +69,7 @@ def apiNewGame():
     gameID = gameset.startNewGame()
     return 'id = ' + str(gameID)
 
-@app.route( webPrefix + '/<gameID>/flag/<x>/<y>/<state>' )
+@app.route( webPrefix + '/games/<gameID>/flag/<x>/<y>/<state>' )
 def webFlag( gameID, x, y, state ):
     game = gameset.getGameByID( gameID )
     game.setFlag( int(x), int(y), state.upper()=='TRUE' )               # brak obslugi bledow
