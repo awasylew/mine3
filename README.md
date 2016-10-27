@@ -3,7 +3,7 @@
 Moja zabawa w aplikację chmurową. 
 Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi potrzebne do testów, na jakie akurat nabiorę ochoty.
 
-# możliwe dalsze kroki
+# możliwe dalsze kroki - _kolejność dowolna_
 
 * HTTPS
 * uzupełnienie odpowiedzi API o nagłówki, wyniki/kody błędów
@@ -21,6 +21,10 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 * testy funckjonalne
 * testy dostępności
 * format wyniku JSON/XML
+* automatyzacja deploymentu dla local+cf+heroku
+* dodanie kolejnych chmur openshift+google+? od razu w wersji skryptowej
+* test funkcjonalności w trybie A/B
+* green/blue i/lub canary deployment
 
 
 # API
