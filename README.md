@@ -5,8 +5,11 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 
 # możliwe dalsze kroki
 
-* uzupełnienie odpowiedzi API o nagłówki
-* dodanie autoryzacji API
+* HTTPS
+* uzupełnienie odpowiedzi API o nagłówki, wyniki/kody błędów
+* paging, podzbiór pól
+* dodanie autoryzacji API, OAuth2
+* WADL, Swagger/OpenAPI
 * dodanie nowego frontu opartego o API
 * dostęp wskroś chmur
 * wariantowy wybór backendu do frontu: albo bezpośrednio albo poprzez API
@@ -17,6 +20,8 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 * sesje użytkownika
 * testy funckjonalne
 * testy dostępności
+* format wyniku JSON/XML
+
 
 # API
 
@@ -25,32 +30,15 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 	.../api/v1/...
 
 ## kolekcje zasobów
-kolekcje składają się oddzielnych zasobów
-
-	GET .../games
-	POST .../games     ??? czy w taki sposób
-	DELETE .../games      ??? wyczyszczenie? wyłączenie serwera?
+	[częściowo] GET .../games
+	[done] POST .../games
+	DELETE .../games      
 
 ## zasoby
-każdy zasób ma pola prosta zarządzane przez HTTP oraz podobiekty - podzasoby
-
-	GET .../games/3654
-	DELETE .../games/3654      ??? czy potrzeba
+	[done] GET .../games/3654
+	DELETE .../games/3654
 
 ## działania
-czasowniki, które nie mieszczą się w podejściu zasobowym
-w tej grupie potrzebne stosowne wejście i wyjście
-
 	[done] POST .../games/3654/set_flag?x=2&y=3&state=true
 	[done] POST .../games/3654/set_flag?x=0&y=2&state=false
 	[done] POST .../games/3654/step?x=2&y=3
-
-# zapiski, zadania z RESTful - UPORZĄDKOWAĆ
-ścieżka zdrowia – OPCJONALNIE (zdecydować czy robić czy tylko się dowiedzieć)
-
-* HTTPS
-* OAuth2
-* wyniki/kody błędów
-* paging
-* format wyniku JSON/XML
-* WADL, Swagger/OpenAPI
