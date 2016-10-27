@@ -1,7 +1,22 @@
-# ships2
+# mine1
 
 Moja zabawa w aplikację chmurową. 
 Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi potrzebne do testów, na jakie akurat nabiorę ochoty.
+
+# możliwe dalsze kroki
+
+* uzupełnienie odpowiedzi API o nagłówki
+* dodanie autoryzacji API
+* dodanie nowego frontu opartego o API
+* dostęp wskroś chmur
+* wariantowy wybór backendu do frontu: albo bezpośrednio albo poprzez API
+* utrwalanie danych w sqlite w pamięci
+* utrwalanie danych w sqlite na dysku
+* utrwalanie danych w prawdziwej bazie jakiś MySQL + jakiś Postgres
+* wiązana z różnymi bazami danych - w tym wskroś chmur
+* sesje użytkownika
+* testy funckjonalne
+* testy dostępności
 
 # API
 
