@@ -17,7 +17,7 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 * wariantowy wybór backendu do frontu: albo bezpośrednio albo poprzez API
 * utrwalanie danych w sqlite w pamięci
 * utrwalanie danych w sqlite na dysku
-* utrwalanie danych w prawdziwej bazie jakiś MySQL + jakiś Postgres
+* utrwalanie danych w prawdziwej bazie jakiś MySQL + jakiś Postgres (rozważania/eksperymenty z izolacją, synchronizacją, etc)
 * wiązana z różnymi bazami danych - w tym wskroś chmur
 * sesje użytkownika
 * testy funckjonalne
