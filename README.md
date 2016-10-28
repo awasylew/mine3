@@ -7,6 +7,7 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 
 * dokończyć aktualne oddzielanie deploymentu
 * rozwijać oddzielne pomysły w odrębnych gałęziach i ćwiczyć synchronizowanie pomiędzy gałęziami
+* deployment gałęzi bocznej - obok produkcyjnej
 * HTTPS
 * uzupełnienie odpowiedzi API o nagłówki, wyniki/kody błędów
 * paging, podzbiór pól
