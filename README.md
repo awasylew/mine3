@@ -5,6 +5,8 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 
 # możliwe dalsze kroki - _kolejność dowolna_
 
+* dokończyć aktualne oddzielanie deploymentu
+* rozwijać oddzielne pomysły w odrębnych gałęziach i ćwiczyć synchronizowanie pomiędzy gałęziami
 * HTTPS
 * uzupełnienie odpowiedzi API o nagłówki, wyniki/kody błędów
 * paging, podzbiór pól
