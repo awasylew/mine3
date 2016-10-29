@@ -6,6 +6,6 @@ robocopy .. dtemp /s /xd deploy venv .git __pycache__
 robocopy pws dtemp /s
 cd dtemp
 cf push
-pause
 cd ..
 rmdir dtemp /s /q
+pause
