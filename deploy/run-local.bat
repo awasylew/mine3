@@ -1,5 +1,5 @@
-c:
-cd C:\Users\adam\dev\mine
+%~d0
+cd %~p0..
 call venv\Scripts\activate
 set FLASK_APP=mine.py
 set FLASK_DEBUG=1
