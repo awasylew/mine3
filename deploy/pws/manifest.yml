@@ -1,0 +1,6 @@
+---
+applications:
+- name: awmine
+  memory: 128M
+  instances: 1
+  host: awmine
