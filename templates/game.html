@@ -25,7 +25,12 @@ parametry:
 	
 	<div>total mines: {{ game.totalMines }} </div> 
 	
-	<div>mines left: {{ game.getMinesLeft() }} </div> 
+	{% set minesLeft=game.getMinesLeft() %} 
+	<div 
+		{% if minesLeft<0 %} style='color:red' {% endif %}
+		{% if minesLeft==0 %} style='color:orange' {% endif %}> 
+	mines left: {{minesLeft}}
+	</div> 
 	
 	{% set status = game.status %}
 	

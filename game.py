@@ -82,6 +82,17 @@ class Game(object):
             for y in range(self.width):
                 yield x,y
                 
+    def getMinesLeft(self):
+        """
+        Zwraca liczbe nieoznaczonych min - wynikajaca z wypelnienia planszy i oznaczen flagami. 
+        Nie bada dopasowania flag do min - jesli gracz zle stawia flagi, to licznik i tak się zmniejsza.
+        Jesli flag jest wiecej niz min, zwraca zero. 
+        """
+        fieldValues = list(self.field.values())
+        flags = fieldValues.count( 'Fe' ) + fieldValues.count( 'FM' )
+        # return max( self.totalMines - flags, 0 )
+        return self.totalMines - flags
+
     def neighbourCells(self,xy):
         """
         Funkcja pomocnicza - generuje wspolrzedne wszystkich pol otaczajacych dane pole - sprawdzajac czy nie wychodza poza plansze.
@@ -199,16 +210,6 @@ class Game(object):
                 self.field[xy] = self.field[xy][1:]
                 self.checkSuccess()
     
-    def getMinesLeft(self):
-        """
-        Zwraca liczbe nieoznaczonych min - wynikajaca z wypelnienia planszy i oznaczen flagami. 
-        Nie bada dopasowania flag do min - jesli gracz zle stawia flagi, to licznik i tak się zmniejsza.
-        Jesli flag jest wiecej niz min, zwraca zero. 
-        """
-        fieldValues = list(self.field.values())
-        flags = fieldValues.count( 'Fe' ) + fieldValues.count( 'FM' )
-        return max( self.totalMines - flags, 0 )
-
     """
     def show(self, transform):
         print('   ', end='')
