@@ -2,7 +2,7 @@
 cd %~p0
 rmdir dtemp /s /q
 mkdir dtemp
-robocopy .. dtemp /s /xd deploy venv .git __pycache__
+robocopy .. dtemp /s /xd deploy .git __pycache__
 robocopy heroku dtemp /s
 cd dtemp
 
