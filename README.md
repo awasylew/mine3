@@ -5,7 +5,7 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 
 # możliwe dalsze kroki - _kolejność dowolna_
 
-* dokończyć aktualne oddzielanie deploymentu
+* dokończyć aktualne oddzielanie deploymentu (może jeszcze: foldery src/non-src? nie kopiować grafiki+ w robocopy?)
 * rozwijać oddzielne pomysły w odrębnych gałęziach i ćwiczyć synchronizowanie pomiędzy gałęziami
 * deployment gałęzi bocznej - obok produkcyjnej
 * HTTPS
