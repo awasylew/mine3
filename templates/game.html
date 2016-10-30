@@ -1,4 +1,12 @@
-{# skrocic plik wynikowy bez pogarszania czytelnosci zrodlowego #}
+{# 
+todo: skrocic plik wynikowy bez pogarszania czytelnosci zrodlowego
+
+parametry:
+	game -> Game
+	game_ids -> ?
+	game_url
+	games_url
+#}
 
 <html>
 
@@ -70,12 +78,12 @@
 
 {% endif %}
 	
-<div><a href='/ab/games'>Current games:</a></div>
+<div><a href='{{games_url}}'>Current games:</a></div>
 {% for game_id in game_ids %}
-	<div><a href='{{ games_url }}/{{game_id}}'>{{ game_id }}</a></div>
+	<div><a href='{{games_url}}/{{game_id}}'>{{game_id}}</a></div>
 {% endfor %}
 
-<div><a href='/ab/games/new'>new game</a></div>
+<div><a href='{{games_url}}/new'>new game</a></div>
 <br/>
 
 <div><a href='/api/v1'>API</a>
