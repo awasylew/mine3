@@ -11,10 +11,11 @@ app = Flask(__name__)
 gameset = GameSet()
 apiPrefix = '/api/v1'
 apiPrefixBare = '/api'
-webPrefix = '/ab'
+#webPrefix = '/ab'
+webPrefix = ''
 
 @app.route( '/' )
-@app.route( webPrefix )
+# @app.route( webPrefix )  chwilowo wylaczone, bo puste nie dziala - da sie poprawic?
 def webRoot():
     return redirect( url_for('webGamesDefault'))
 
