@@ -22,12 +22,15 @@ Nie będzie rozwijana do pełnej funkcjonalności - tylko tyle ile będzie mi po
 * wiązana z różnymi bazami danych - w tym wskroś chmur
 * sesje użytkownika
 * testy funckjonalne
+* testy API
 * testy dostępności
 * format wyniku JSON/XML
 * automatyzacja deploymentu dla local+cf+heroku
 * dodanie kolejnych chmur openshift+google+? od razu w wersji skryptowej
 * test funkcjonalności w trybie A/B
 * green/blue i/lub canary deployment
+* dokumentowanie - txt
+* dokumentowanie - projekty architektury as-is i to-be (ArchiMate?)
 
 
 # API
