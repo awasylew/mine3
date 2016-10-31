@@ -1,11 +1,11 @@
 %~d0
 cd %~p0
-rmdir dtemp /s /q
-mkdir dtemp
-robocopy .. dtemp /s /xd deploy .git __pycache__
-robocopy pws dtemp /s
-cd dtemp
+rmdir temp-pws /s /q
+mkdir temp-pws
+robocopy .. temp-pws /s /xd deploy .git __pycache__
+robocopy pws temp-pws /s
+cd temp-pws
 cf push
 cd ..
-rmdir dtemp /s /q
+rmdir temp-pws /s /q
 pause
