@@ -4,14 +4,125 @@ from flask import request
 from flask import redirect, url_for
 from flask import jsonify
 import os
-# from game import Game
+
+#from flask_sqlalchemy import SQLAlchemy
+
+#from game import Game
 from gameset import GameSet
- 
+#from persistentgameset import PersistentGameSet
+
+from persistentgame import PersistentGame, Base
+from persistentgameset import PersistentGameSet 
+
+from sqlalchemy import *
+from sqlalchemy.orm.session import sessionmaker
+
+#gameset = GameSet()
+gameset = PersistentGameSet()
+
 app = Flask(__name__) 
-gameset = GameSet()
+
+engine = create_engine('sqlite:///data.sqlite', echo=True)
+#engine = create_engine('sqlite://', echo=True)
+Base.metadata.drop_all(engine)
+Base.metadata.create_all(engine)  
+print('created')      
+
+Session = sessionmaker( bind=engine )
+print( Session )
+session = Session()
+print( session )
+gameset.session = session
+
+# app.config['SQLALCHEMY_DATABASE_URI']='sqlite://'
+# db = SQLAlchemy(app)
+
+"""
+class PersistentGame(db.Model, Game):
+    __tablename__ = 'games'
+    
+    id = db.Column( db.Integer, primary_key=True )
+    
+    gameID = db.Column( db.String(20))
+    width = db.Column( db.Integer )
+    height = db.Column( db.Integer )
+    totalMines = db.Column( db.Integer )
+    status = db.Column( db.String(20))
+    field = db.Column( db.PickleType )              # ew. mozna zmienic picklera na prostszy
+    
+    def __init__(self):
+        Game(self).__init__()
+    
+    def __repr__(self):
+        return "PersistentGame(id:%d, gameID:%s, status:%s)" % (self.id, self.gameID, self.status)
+
+
+db.create_all()
+print( 'created' )
+
+from random import random 
+
+
+class PersistentGameSet(GameSet):
+    
+#    def __init__(self):
+#        super(self).__init__()
+#        self.engine = create_engine('sqlite://', echo=True)
+#        Base.metadata.create_all(self.engine)        
+#        Session = sessionmaker(bind=self.engine)
+#        db.session = Session()
+#        print( 'engine:', self.engine )
+#        print( 'session:', db.session )
+#        print( 'before' )
+#        traceback.print_stack()
+#        print( 'after' )
+#        g = PersistentGame()
+#        db.session.add(g)
+#        db.session.commit()
+#        print( 'commit' )
+        
+        
+    def startNewGame(self):
+        print('startNewGame')
+                
+        newID = int( random() * 9000 + 1000)
+        while( newID in self.games ):
+            newID = int( random() * 9000 + 1000)
+        newID = str(newID)
+        
+        newGame = PersistentGame()
+        newGame.gameID = newID
+        db.session.add(newGame)
+        db.session.commit()
+        print( 'added, commited')
+
+        q1 = db.session.query(PersistentGame.gameID).all()
+        print(q1)
+        q2 = db.session.query(PersistentGame).all()
+        print(q2)
+        
+        self.games[newID] = newGame
+        return newID
+ 
+    def getGameList(self): # zwraca list� id gier
+        
+        q = db.session.query(PersistentGame.gameID).all()
+        print(q)
+        return q
+#        return list( self.games.keys())
+    
+    def getGameByID(self,id):  # zwraca obiekt gry
+        q = db.session.query(PersistentGame).filter(PersistentGame.gameID==id).first()
+        print('getGameByID q:', q)
+        print('getGameByID type:', type(q))
+        return q
+#        return self.games[id]
+
+"""
+
+
 apiPrefix = '/api/v1'
 apiPrefixBare = '/api'
-#webPrefix = '/ab'
 webPrefix = ''
 
 @app.route( '/' )
@@ -56,12 +167,13 @@ def apiShowField( gameID ):                                         # nazwa?
            'totalMines': game.totalMines,
            'minesLeft': game.getMinesLeft(),
            'status': game.status,
-           'field': game.fieldAsString(True) }
+           'field': game.getFieldAsString(True) }
     return jsonify(rsp)                                             # dodac naglowki
 
 @app.route( webPrefix + '/games/new' )                                         # w wersji API POST zamiast /new 
 def webNewGame():
     gameID = gameset.startNewGame()
+    print('started:', gameID )
 #    return 'id = ' + str(id)
     return redirect( url_for('webGamesDefault', gameID=gameID ))
 
@@ -70,10 +182,19 @@ def apiNewGame():
     gameID = gameset.startNewGame()
     return 'id = ' + str(gameID)
 
-@app.route( webPrefix + '/games/<gameID>/flag/<x>/<y>/<state>' )
+@app.route( webPrefix + '/games/<gameID>/flag/<x>/<y>/<state>' )            # tutaj sciezka na x/y/state, a w api parametry?
 def webFlag( gameID, x, y, state ):
     game = gameset.getGameByID( gameID )
+    print('pre add')
+    session.add(game)
+    print( type(game))
+    print( session.dirty, session.is_modified(game))
     game.setFlag( int(x), int(y), state.upper()=='TRUE' )               # brak obslugi bledow
+    game.counter += 1
+    game.fieldStr = game.getFieldAsString(True)
+    print( session.dirty, session.is_modified(game))
+    session.commit()
+    print('post commit')
     return redirect( url_for('webGamesDefault', gameID=gameID ))
 
 @app.route( apiPrefix + '/games/<gameID>/flag', methods=['GET', 'POST'])                    # powinno byc tylko POST
@@ -93,7 +214,11 @@ def apiFlag( gameID ):
 @app.route( webPrefix + '/games/<gameID>/step/<x>/<y>' )
 def webStep( gameID, x, y ):
     game = gameset.getGameByID( gameID )
+    session.add(game)
     game.stepOnField(int(x),int(y))                                     # brak obslugi bledow
+    game.counter += 1
+    game.fieldStr = game.getFieldAsString(True)
+    session.commit()
     return redirect( url_for('webGamesDefault', gameID=gameID ))
 
 @app.route( apiPrefix + '/games/<gameID>/step', methods=['GET', 'POST'] )                   # powinno byc tylko POST
@@ -118,5 +243,6 @@ def quit_server():
     return "Quitting server..."
    
 if __name__ == '__main__':
+    print('if')
     port = int(os.getenv("PORT"))
     app.run(host='0.0.0.0', port=port) 

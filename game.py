@@ -36,7 +36,7 @@ class Game(object):
         self.status = 'ready'  
         self.clearField()
         
-    def fieldAsString(self, external=False):
+    def getFieldAsString(self, external=False):
         """
         Zwraca cale pole jako jeden napis wierszami z gory na dol. Wiersze oddzielone '/'.
         Pola wierszy od lewej do prawej. Pola oddzielone '&'.
@@ -47,11 +47,11 @@ class Game(object):
             Pozostale pola przeksztalcane, zeby ukryc zawartosc (warunkowo zaleznie of statusu gry).
         """
         result = ''
-        for y in range(self.width):
+        for y in range(self.height):
             row = ''
-            for x in range(self.height):
+            for x in range(self.width):
                 f = self.field[ x,y ]
-                if not external or f in [ '.', '1', '2', '3', '4', '5', '6', '7', '8', 'B']:
+                if external or f in [ '.', '1', '2', '3', '4', '5', '6', '7', '8', 'B']:
                     fld = f
                 elif f in [ 'Fe', 'FM' ]:
                     if self.status == 'fail':
@@ -73,7 +73,19 @@ class Game(object):
             result += row
         return result
         
-    
+    def setFieldFromString(self, stringField):
+        """
+        Odtwarza pole z zewnetrznego napisu zwracanego przez getFieldAsString.
+        """
+        print( stringField )
+        rows = stringField.split('/')
+        print( rows )
+        for y in range(self.height):
+            cells = rows[y].split('&')
+            print(cells)
+            for x in range(self.width):
+                self.field[x,y] = cells[x]
+        
     def allCells(self):
         """
         Funkcja pomocnicza - generuje oniesienia do wszystkich elementow planszy
@@ -90,7 +102,6 @@ class Game(object):
         """
         fieldValues = list(self.field.values())
         flags = fieldValues.count( 'Fe' ) + fieldValues.count( 'FM' )
-        # return max( self.totalMines - flags, 0 )
         return self.totalMines - flags
 
     def neighbourCells(self,xy):

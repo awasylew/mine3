@@ -13,7 +13,6 @@ class GameSet(object):
         new_game = Game()
         self.games[str(id)] = new_game
         return id
-        
     
     def getGameList(self): # zwraca listê id gier
         return list( self.games.keys())
@@ -21,8 +20,8 @@ class GameSet(object):
     def getGameByID(self,id):  # zwraca obiekt gry
         return self.games[id]
 
-    def deleteGame(self,id):  # usuwa gr
-        pass
+#    def deleteGame(self,id):  # usuwa gr
+#        pass
     
     # KIEDY UTRWALAC GRE w BAZIE DANYCH???
     
