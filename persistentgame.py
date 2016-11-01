@@ -11,7 +11,7 @@ class PersistentGame(Game, Base):
     
     id = Column( Integer, primary_key=True )
     
-    counter = Column( Integer )
+#    counter = Column( Integer )
     fieldStr = Column( String )
     
     gameID = Column( String(20))
@@ -22,6 +22,6 @@ class PersistentGame(Game, Base):
     field = Column( PickleType )              # ew. mozna zmienic picklera na prostszy
     
     def __repr__(self):
-        return 'PersistentGame( %r, %r, %r, %r, %r, %r, %r, %r, %r )' % \
-            (self.id, self.counter, self.gameID, self.status, self.width, self.height, self.totalMines, self.fieldStr, self.field )
+        return 'PersistentGame( %r, %r, %r, %r, %r, %r, %r, %r )' % \
+            (self.id, self.gameID, self.status, self.width, self.height, self.totalMines, self.fieldStr, self.field )
     

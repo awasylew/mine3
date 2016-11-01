@@ -40,7 +40,7 @@ class PersistentGameSet():
         
         newGame = PersistentGame()
         newGame.gameID = newID
-        newGame.counter = 1
+#        newGame.counter = 1
         newGame.fieldStr = newGame.getFieldAsString(True)
         self.session.add(newGame)
         self.session.commit()

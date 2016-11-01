@@ -190,7 +190,7 @@ def webFlag( gameID, x, y, state ):
     print( type(game))
     print( session.dirty, session.is_modified(game))
     game.setFlag( int(x), int(y), state.upper()=='TRUE' )               # brak obslugi bledow
-    game.counter += 1
+#    game.counter += 1
     game.fieldStr = game.getFieldAsString(True)
     print( session.dirty, session.is_modified(game))
     session.commit()
@@ -216,7 +216,7 @@ def webStep( gameID, x, y ):
     game = gameset.getGameByID( gameID )
     session.add(game)
     game.stepOnField(int(x),int(y))                                     # brak obslugi bledow
-    game.counter += 1
+#    game.counter += 1
     game.fieldStr = game.getFieldAsString(True)
     session.commit()
     return redirect( url_for('webGamesDefault', gameID=gameID ))
