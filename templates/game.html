@@ -23,7 +23,11 @@ parametry:
 
 <div> {{game}} </div>
 
-	<div>status: {{ game.status }} </div>
+	<div
+		{% if game.status=='fail' %} style='color:red; font-weight:900' {% endif %}
+		{% if game.status=='success' %} style='color:green; font-weight:900' {% endif %}> 
+	status: {{ game.status }}
+	</div>
 	
 	<div>total mines: {{ game.totalMines }} </div> 
 	
